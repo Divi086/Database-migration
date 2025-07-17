@@ -1,0 +1,32 @@
+-- View all tables in the current database
+SHOW TABLES;
+
+-- View structure of a specific table
+DESCRIBE users;
+DESCRIBE orders;
+DESCRIBE products;
+
+-- Count rows in a table
+SELECT COUNT(*) FROM users;
+SELECT COUNT(*) FROM orders;
+SELECT COUNT(*) FROM products;
+
+-- View sample records
+SELECT * FROM users LIMIT 5;
+SELECT * FROM orders LIMIT 5;
+SELECT * FROM products LIMIT 5;
+
+-- Check for NULLs in important columns
+SELECT * FROM users WHERE email IS NULL;
+SELECT * FROM orders WHERE user_id IS NULL;
+
+-- Check for duplicates in a column (e.g., emails)
+SELECT email, COUNT(*) as count
+FROM users
+GROUP BY email
+HAVING count > 1;
+
+-- Verify foreign key integrity (example: orders -> users)
+SELECT *
+FROM orders
+WHERE user_id NOT IN (SELECT id FROM users);
